@@ -10,8 +10,6 @@ import Toggle from "./components/Toggle";
 import Accordian from "./components/Accordian";
 import MyDialog from "./components/Dialog";
 import Radio from "./components/RadioGroup";
-import { ArrowRight } from "@geist-ui/icons";
-import Task from "./components/CheckBox";
 function App() {
   const people = [
     { name: "Wade Cooper" },
