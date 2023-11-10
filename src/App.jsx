@@ -169,50 +169,6 @@ function App() {
           </GridCell>
         </Grid>
         <Spacer />
-        <Grid cols={5}>
-          <GridCell span={2}>
-            <div className="p-4">
-              <h2 className="text-xl font-semibold">Todos</h2>
-              <div className="py-2 space-y-2">
-                {tasks.map((step, idx) => {
-                  return (
-                    <div key={idx}>
-                      {!step.completed && (
-                        <Task selectTask={selectTask} task={step} />
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </GridCell>
-          <GridCell span={1}>
-            <div className="flex items-center justify-center p-4">
-              <button
-                onClick={transferTasks}
-                type="button"
-                className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-accent hover:bg-accent/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              >
-                Transfer
-                <ArrowRight size={16} />
-              </button>
-            </div>
-          </GridCell>
-          <GridCell span={2}>
-            <div className="p-4">
-              <h2 className="text-xl font-semibold">Done</h2>
-              <div className="py-2 space-y-2">
-                {tasks.map((step, idx) => {
-                  return (
-                    <div key={idx}>
-                      {step.completed && <Task task={step} />}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </GridCell>
-        </Grid>
       </Container>
     </>
   );
