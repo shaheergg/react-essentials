@@ -10,6 +10,8 @@ import Toggle from "./components/Toggle";
 import Accordian from "./components/Accordian";
 import MyDialog from "./components/Dialog";
 import Radio from "./components/RadioGroup";
+import Tabs from "./components/Tabs";
+import { motion } from "framer-motion";
 function App() {
   const people = [
     { name: "Wade Cooper" },
@@ -19,16 +21,18 @@ function App() {
     { name: "Tanya Fox" },
     { name: "Hellen Schmidt" },
   ];
-  const [selectedTasks, setSelectedTasks] = useState([]);
-  const selectTask = (task) => {
-    if (selectedTasks.includes(task)) {
-      setSelectedTasks(selectedTasks.filter((t) => t !== task));
-    }
-    setSelectedTasks([...selectedTasks, task]);
-  };
-  console.log(selectedTasks);
-  let [isOpen, setIsOpen] = useState(false);
+  let tabs = [
+    { id: "world", label: "World", content: "Whole world" },
+    { id: "ny", label: "N.Y.", content: "New York" },
+    { id: "business", label: "Business", content: "Business" },
+    { id: "tech", label: "Tech", content: "Technology" },
+    { id: "sports", label: "Sports", content: "Sports" },
+    { id: "arts", label: "Arts", content: "Arts" },
+    { id: "science", label: "Science", content: "Science" },
+  ];
 
+  let [isOpen, setIsOpen] = useState(false);
+  let [activeTab, setActiveTab] = useState(tabs[0].id);
   function closeModal() {
     setIsOpen(false);
   }
@@ -103,13 +107,7 @@ function App() {
   const [selected, setSelected] = useState(people[0]);
   const [enabled, setEnabled] = useState(false);
   const [selectPlan, setSelectPlan] = useState(plans[0]);
-  const transferTasks = () => {
-    let selected = selectedTasks;
-    selected.forEach((task) => {
-      task.completed = true;
-    });
-    setTasks([...selected]);
-  };
+
   return (
     <>
       <Header />
@@ -165,7 +163,33 @@ function App() {
               />
             </div>
           </GridCell>
+          <GridCell span={4}>
+            <Tabs
+              tabs={tabs}
+              setActiveTab={setActiveTab}
+              activeTab={activeTab}
+            />
+            <div className="">
+              {tabs.map((tab) => {
+                return (
+                  tab.id === activeTab && (
+                    <motion.div
+                      key={tab.id}
+                      className="p-2 text-gray-600"
+                      initial={{ opacity: 0.5 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0.5 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      {tab.content}
+                    </motion.div>
+                  )
+                );
+              })}
+            </div>
+          </GridCell>
         </Grid>
+
         <Spacer />
       </Container>
     </>
